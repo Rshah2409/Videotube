@@ -1,0 +1,109 @@
+﻿@model Videotube.Models.Videos
+@{
+    ViewBag.Title = "Save_vid";
+    Layout = "~/Views/Shared/_LayoutPage1.cshtml";
+}
+
+<script type="text/javascript" src='https://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.3.min.js'></script>
+
+
+<script language="javascript">
+    function printdiv(printpage) {
+        var headstr = "";
+        var footstr = "";
+        var newstr = document.all.item(printpage).innerHTML;
+        var oldstr = document.body.innerHTML;
+        document.body.innerHTML = headstr + newstr + footstr;
+        window.print();
+        document.body.innerHTML = oldstr;
+        return false;
+    }
+</script>
+
+<br />
+<center>
+    <div id="div_print">
+        <style type='text/css'>
+
+            body {
+                font-family: Helvetica,Calibri;
+                
+            }
+
+
+            table {
+                margin-top: -2px;
+                
+                width: 70%;
+                font-size: 13px;
+            }
+
+            tr td {
+                border-collapse: collapse;
+                border: 1px solid #000;
+                padding: 1px 3px 1px 3px;
+            }
+
+            table, th {
+                border-collapse: collapse;
+                border: solid 1.1px #000;
+                text-align: center;
+            }
+
+            .center {
+                text-align: center;
+            }
+
+            .right {
+                text-align: right;
+            }
+
+            .left {
+                text-align: left;
+            }
+        </style>
+
+      
+                <table width='100%'>
+                    <tr>
+                        <td rowspan='4' width='62%' style='height:70px; vertical-align: text-top; ' class='left' align="center">
+                            <h2 align="center"><b>Payment Receipt</h2></b>
+
+
+                        </td>
+                    </tr>
+                </table>
+
+
+                <table width='100%' border="0" align="center">
+                    <tr>
+                        <td rowspan='4' width='62%' style='height:70px; vertical-align:text-top;' class='left' align="center">
+                            <br />
+                            <b>Dear @Session["fname"] ,<br> Thank You for chossing VideosTube for your learning pathway.We are pleased to inform you that your payment is successfully done. <br>Your plan details are shows as follows:</b><br>
+                            <b><br>Plan Name: @TempData["planname"]  <br>Subscribed Date: @TempData["itemdate"]    <br>Expiry Date:@TempData["expdate"]   <br />Paid Amount:@TempData["amt"] Rs. <br />  Email:@Session["Viwere_ID"]   </b><br /><br />
+                            <b>Note: Please save or download this receipt in case of any problem.</b>
+                            <br />
+
+
+                        </td>
+                    </tr>
+
+                </table>
+            </div>
+            <br />
+            <br />
+           
+            <center>
+
+                <input name="b_print" type="button" onclick="printdiv('div_print');" value="Print " class="btn-primary" />
+
+            </center>
+
+
+        </center>
+
+
+
+
+
+

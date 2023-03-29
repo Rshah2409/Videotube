@@ -1,0 +1,212 @@
+﻿@model Videotube.Models.Videos
+
+@{
+    ViewBag.Title = "Home";
+    Layout = "~/Views/Shared/_LayoutPage1.cshtml";
+}
+@if (ViewData["Watch"] != null)
+{
+
+
+    @ViewData["Watch"]
+}
+
+<!--@if (ViewData["Watch"]!=null)
+{
+    <script language="javascript">
+
+                                    alert('@ViewData["Watch"]');-->
+@*window.location.href = "@Url.Action("Login", "Viewer")";*@
+
+<!--</script>
+}-->
+
+
+
+
+
+<div class="content">
+    <div class="left-content">
+        <div class="searchbar">
+            <div class="search-left">
+                <p>Latest Video Form VideosTube</p>
+            </div>
+            <div class="search-right">
+                <form action="/Viewer/Home" method="post">
+                    <input type="text"><input type="submit" value="" />
+                </form>
+            </div>
+            <div class="clear"> </div>
+        </div>
+        @{ int count = 1; }
+        @foreach (var item in Model.videos)
+        {
+
+            <div class="grid">
+                <h3 align="center">@item.V_title</h3>
+
+
+                @*<a href="single.html<!-->--><img src="images/g1 copy.png" title="video-name" />@item.V_title</a>*@
+
+                @*@item.V_file*@
+
+
+                @if (Session["Viwere_ID"] == null)
+                {
+                    <video width="250" height="150" controls controllist="nodownload" @*poster="~Content/Expert/hh.jfif"*@>
+
+                        <source src="#" type="video/mp4">
+
+                    </video>
+                }
+                else
+                {
+                    <video width="250" height="150" controls controllist="nodownload" @*poster="~Content/Expert/hh.jfif"*@>
+
+                        <source src="@Url.Content(item.V_file)" type="video/mp4">
+
+                    </video>
+                }
+
+
+                @*<div class="time">
+                        <span>00:10</span>
+                    </div>*@
+                <div class="grid-info">
+
+
+                    @if (Session["Viwere_ID"] == null)
+                    {
+
+                        <div class="video-watch">
+                            <a href="/Viewer/watch_alert">Details</a>
+                        </div>
+                    }
+                    else
+                    {
+
+
+                        <div class="video-watch">
+                            <a href="/Viewer/Contain?vid=@item.Video_ID">Description</a>
+
+                        </div>
+
+                        @*@if (TempData["subscribe"] != null)
+                            {
+                            <script language="javascript">
+
+                                  alert('@TempData["subscribe"]');
+
+                                window.location.href = "@Url.Action("Library", "Viewer")";
+
+                            </script>
+                            }*@
+
+
+
+                    }
+
+                    <div class="clear"> </div>
+                    <div class="lables">
+                        <p>category:<a @*href="categories.html"*@>@item.V_category</a></p>
+
+                        @using System.Data.SqlClient;
+                        @using System.Data;
+
+                        @{
+                            SqlConnection con = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\ritik\OneDrive\Desktop\Videotube\Videotube\App_Data\Database1.mdf;Integrated Security=True");
+
+                            con.Open();
+                            SqlCommand cmd = new SqlCommand("select First_name,Last_name from reg_exp where Email_ID='" + item.Expert_ID + "' ", con);
+                            cmd.ExecuteScalar();
+                            SqlDataAdapter da = new SqlDataAdapter(cmd);
+                            DataSet ds = new DataSet();
+                            da.Fill(ds);
+
+                            if (ds.Tables[0].Rows.Count > 0)
+                            {
+
+
+
+                                string fname = ds.Tables[0].Rows[0]["First_name"].ToString();
+                                string lanme = ds.Tables[0].Rows[0]["Last_name"].ToString();
+
+
+                                <p>Expert:<a @*href="categories.html"*@>@fname  @lanme</a></p>
+
+                            }
+                        }
+
+                    </div>
+
+
+
+                </div>
+
+
+            </div>
+
+
+        }
+
+
+        <div class="clear"> </div>
+        <ul class="dc_pagination dc_paginationA dc_paginationA03">
+            <li><a href="#" class="first">First</a></li>
+            <li><a href="#" class="previous">Previous</a></li>
+            <li><a href="#" class="current">1</a></li>
+            <li><a href="#">2</a></li>
+            <li><a href="#" @*class="current"*@>3</a></li>
+            <li><a href="#">4</a></li>
+            <li><a href="#">5</a></li>
+            <li><a href="#" class="next">Next</a></li>
+            <li><a href="#" class="last">Last</a></li>
+
+        </ul>
+        <div class="clear"> </div>
+    </div>
+
+
+
+
+
+
+
+
+
+    <div class="right-content">
+        <div class="popular">
+            <h3>Popular Videos</h3>
+
+            <div class="clear"> </div>
+        </div>
+
+
+
+
+
+
+        <div class="clear"> </div>
+        <div class="Recent-Vodeos">
+            <h3>Recent-Videos</h3>
+
+            @*<div class="r-all">
+                    <a href="#">View All</a>
+                </div>*@
+        </div>
+    </div>
+    <div class="clear"> </div>
+</div>
+<div class="clear"> </div>
+
+
+@if (TempData["subscribe"] != null)
+{
+    <script language="javascript">
+
+                      alert('@TempData["subscribe"]');
+
+                    window.location.href = "@Url.Action("Library", "Viewer")";
+
+    </script>
+}

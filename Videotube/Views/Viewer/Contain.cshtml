@@ -1,0 +1,169 @@
+﻿
+@model Videotube.Models.Videos
+@{
+    ViewBag.Title = "Contain";
+    Layout = "~/Views/Shared/_LayoutPage1.cshtml";
+}
+<div class="content">
+    <div class="inner-page">
+        <div class="searchbar">
+            @*<div class="search-left">
+                <p>Latest Video Form VideosTube</p>
+            </div>
+            <div class="search-right">
+                <form>
+                    <input type="text"><input type="submit" value="" />
+                </form>
+            </div>*@
+
+        </div>
+        @foreach (var item in Model.videos)
+
+        {
+            <div class="title">
+                @*<h3>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </h3>*@
+                <h3>Video Title : @item.V_title</h3>
+                <h4>Video Category: @item.V_category</h4>
+
+
+                <ul>
+                    @using System.Data.SqlClient;
+                    @using System.Data;
+
+                    @{
+                        SqlConnection con = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\ritik\OneDrive\Desktop\Videotube\Videotube\App_Data\Database1.mdf;Integrated Security=True");
+
+                        con.Open();
+                        SqlCommand cmd = new SqlCommand("select First_name,Last_name from reg_exp where Email_ID='" + item.Expert_ID + "' ", con);
+                        cmd.ExecuteScalar();
+                        SqlDataAdapter da = new SqlDataAdapter(cmd);
+                        DataSet ds = new DataSet();
+                        da.Fill(ds);
+
+                        if (ds.Tables[0].Rows.Count > 0)
+                        {
+                            string fname = ds.Tables[0].Rows[0]["First_name"].ToString();
+                            string lanme = ds.Tables[0].Rows[0]["Last_name"].ToString();
+                            <li><p>Last Updated on <a href="#">@item.up_date</a>By</p></li>
+                            <li><a @*href="categories.html"*@>@fname  @lanme</a></li>
+
+                        }
+                    }
+
+
+                </ul>
+            </div>
+
+            <form action="/Viewer/Save_vid" method="POST">
+                <input type="text" value="@item.V_title" name="title" hidden />
+                <input type="number" hidden name="Sub_ID" value="@item.Sub_ID" id="Sub_ID" />
+                <input type="number" hidden name="Video_ID" value="@item.Video_ID" readonly id="vid" />
+                <input type="text" hidden name="duration" value="@item.Sub_Duration" readonly id="dur"/>
+                <input type="text" hidden name="plan_name" value="@item.Plan_name" readonly id="plan_name"/>
+                <input type="text" hidden name="Sub_charge" value="@item.Sub_charge" readonly id="total" />
+                <input type="text" hidden name="name" value="@Session["fname"]" readonly id="namee" />
+                <input type="text" hidden name="email" value="@Session["Viwere_ID"]" readonly id="email" />
+                <div class="video-details">
+                    <ul>
+                        <h6> Description:@item.V_description</h6>
+                        <h6> Plan Name:@item.Plan_name</h6>
+                        <h6>Subscription Duration for this video is  @item.Sub_Duration  days and amount for the same is  <b> @item.Sub_charge </b> /- Only.</h6>
+                    </ul>
+                    @*Comment:<textarea></textarea>
+                    <br />*@
+
+                    <br />
+
+                    @*<div>
+                        <button type="button" class="btn btn-primary"> Like</button>
+                    </div>*@
+                </div>
+            </form>
+            @*<div>
+                <button type="submit"  class="btn btn-primary"> Subscribe</button>
+            </div>*@
+            <input type="button" value="Pay Here" id="myBtn" onclick="senemail()" class="btn btn-success">
+            <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+            <script type="text/javascript">
+
+    function senemail() {
+        var h = $("#jk").val();
+        var vid = $("#vid").val();
+        var sub_id = $("#Sub_ID").val();
+
+
+        var plan_name = $("#plan_name").val();
+        var dur = $("#dur").val();
+        var totalAmount = $("#total").val();
+        var name = $("#namee").val();
+        var email = $("#email").val();
+
+        var merchant_total = totalAmount*100;
+
+        var merchant_order_id = "123";
+        var currency_code_id = "INR";
+        var options = {
+            "key": "rzp_test_xXiDa4U7OKMnbd",
+            "amount": merchant_total, // 2000 paise = INR 20
+            "name": "VideosTube",
+            "description": "For Subscribing Video",
+
+            "currency": "INR",
+            "netbanking": true,
+            prefill: {
+                name: name,
+                email: email,
+                contact: 9898989898,
+
+            },
+            notes: {
+                soolegal_order_id: merchant_order_id,
+            },
+            "handler": function (response) {
+
+                window.location.href = '@Url.Action("Save_vid", "Viewer")?vid=' + vid + '&dur=' + dur + '&sub_id=' + sub_id + '&plan_name=' + plan_name + '&total=' + totalAmount;
+
+            },
+
+            "theme": {
+                "color": "#528FF"
+            }
+        };
+
+        var rzp1 = new Razorpay(options);
+        rzp1.open();
+
+
+    }
+
+            </script>
+
+
+
+
+            <br />
+            <br />
+            <div>
+                <button type="button" class="btn btn-primary"> Like</button>
+            </div>
+
+
+
+
+
+
+        }
+
+
+
+
+
+    </div>
+                        
+
+
+    
+</div>
+    
+        
+    <div class="clear"> </div>

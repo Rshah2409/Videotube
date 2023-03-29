@@ -1,0 +1,17 @@
+﻿
+
+@{
+    ViewBag.Title = "Plan_update";
+    Layout = "~/Views/Shared/Expertlayout.cshtml";
+}
+
+@if (TempData["msg"]!=null)
+{
+    <script language="javascript">
+
+                                    alert('@TempData["msg"]');
+                                        window.location.href = "@Url.Action("Plan_list", "Expert")";
+
+    </script>
+}
+

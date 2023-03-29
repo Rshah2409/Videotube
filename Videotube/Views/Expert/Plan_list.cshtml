@@ -1,0 +1,141 @@
+﻿
+@model Videotube.Models.Plan_list
+
+@{
+    ViewBag.Title = "Plan_list";
+    Layout = "~/Views/Shared/Expertlayout.cshtml";
+}
+
+<div class="container-fluid">
+
+
+    <script type="text/javascript" src='https://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.3.min.js'></script>
+
+    <!-- Page Heading -->
+    <h1 class="h3 mb-2 text-gray-800" align="center"> Video List</h1>
+
+
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary"> Video DataTables </h6>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>S.N.</th>
+                            <th>Subscription Plan Name </th>
+                            <th>Charge</th>
+                            <th>Duration</th>
+                            <th>Date</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>S.N.</th>
+                            <th>Subscription Plan Name </th>
+                            <th>Charge</th>
+                            <th>Duration</th>
+                            <th>Date</th>
+                            <th>Action</th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+
+                        @{ int count = 1;}
+                        @foreach (var item in Model.Planlist)
+                        {
+                            <tr>
+                                <td>@count</td>
+                                <td hidden>@item.Sub_ID</td>
+                                <td>@item.Plan_name</td>
+                                <td>@item.Sub_charge</td>
+                                <td>@item.Sub_Duration</td>
+                                <td>@item.up_date</td>
+
+
+                                <td>
+                                    <input type="button" id="btnShowLogin_@item.Sub_ID" class="btn btn-primary" value="Update" />
+
+
+                                    <script type="text/javascript">
+                                    $(function () {
+                                        $("#btnShowLogin_@item.Sub_ID").click(function () {
+                                            $('#LoginModal_@item.Sub_ID').modal('show');
+                                        });
+                                    });
+                                    </script>
+
+                                    <div class="modal fade" id="LoginModal_@item.Sub_ID" tabindex="-1" role="dialog" aria-labelledby="ModalTitle"
+                                         aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+
+                                                    <h4 class="modal-title" id="ModalTitle">
+                                                        Edit Plan Details
+                                                    </h4><button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                                        &times;
+                                                    </button>
+                                                </div>
+
+                                                <form action="/Expert/Plan_update" method="post" enctype="multipart/form-data">
+                                                    <div class="modal-body">
+
+
+                                                        <input type="text" id="" value="@item.Sub_ID" name="pid" hidden />
+
+                                                        <label for="txtUsername">
+                                                            Subscription PlanName
+                                                        </label>
+                                                        <input type="text" name="Su_plan" value="@item.Plan_name" class="form-control" @*readonly*@ pattern="[a-zA-Z\s]+" />
+                                                        <label for="txtUsername">
+                                                            Subscription Charge
+                                                        </label>
+                                                        <input type="number" name="Su_charge" class="form-control" required value="@item.Sub_charge" pattern="[0-1000]+" />
+                                                        <label for="txtUsername">
+                                                            Subscription Duration
+                                                        </label><br />
+                                                        <input type="text" name="S_Duration" class="form-control" required value="@item.Sub_Duration" pattern="[a-zA-Z0-9\s]+" title="Plan Duration must contain alphanumeric value e.g.7 Days" />
+
+
+                                                        <label for="txtUsername">
+                                                            Date
+                                                        </label><br />
+                                                        <input type="text" name="up_date" class="form-control" required value="@DateTime.Now.ToString("dd/MM/yyyy")" readonly />
+
+
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <input type="submit" value="Click to Save" class="btn-success" />
+                                                        <button type="button" class="btn btn-default" data-dismiss="modal">
+                                                            Close
+                                                        </button>
+                                                    </div>
+
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+
+
+                                </td>
+
+                            </tr>
+                            count++;
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+

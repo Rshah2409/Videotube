@@ -1,0 +1,16 @@
+﻿
+@{
+    ViewBag.Title = "View_update";
+    Layout = "~/Views/Shared/Expertlayout.cshtml";
+}
+
+@if (TempData["msg"]!=null)
+{
+    <script language="javascript">
+
+                                    alert('@TempData["msg"]');
+                                        window.location.href = "@Url.Action("View_video", "Expert")";
+
+    </script>
+}
+

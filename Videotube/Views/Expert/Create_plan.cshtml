@@ -1,0 +1,81 @@
+﻿
+@{
+    ViewBag.Title = "Create_plan";
+    Layout = "~/Views/Shared/Expertlayout.cshtml";
+}
+
+
+<!-- Nested Row within Card Body -->
+<div class="row">
+
+    <div class="col-lg-7">
+
+        <div class="p-5">
+
+            <form class="user" action="/Expert/Create_plan " method="post">
+
+                <div class="form-group">
+                    Subscription Plan Name  <input type="text" class="form-control "
+                                                   placeholder=" " name="S_plan" required pattern="[a-zA-Z\s]+">
+
+
+                </div>
+                <br />
+
+                <div class="form-group">
+                    Charge (in Rs.)<input type="number" class="form-control "
+                                          placeholder=" " name="S_charge" required pattern="[0-1000]+">
+
+                </div>
+                <br />
+
+
+                <div class="form-group">
+                    Duration (in Days) <input type="text" class="form-control "
+                                              placeholder=" " name="Duration" required pattern="[a-zA-Z0-9\s]+" title="Plan Duration must contain alphanumeric value e.g.7 Days">
+                </div>
+                <br />
+
+
+
+                
+
+
+
+
+
+
+
+                <center>
+
+                    <button type="submit" class="btn btn-primary btn-user"> Submit</button>
+                    <button type="reset" class="btn btn-primary btn-user"> Reset</button>
+                </center>
+
+                @if (ViewData["msg"] != null)
+                {
+                    <script language="javascript">
+
+                                    alert('@ViewData["msg"]');
+                                        window.location.href = "@Url.Action("Create_plan", "Expert")";
+
+                    </script>
+                }
+
+            </form>
+
+
+        </div>
+    </div>
+</div>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+<script type="text/javascript">
+    $('input[name="S_charge"]').keyup(function () {
+        if ($(this).val() > 1000) {
+            alert("Charges must be less than 1000 Rs.");
+            $(this).val("");
+        }
+    });</script>

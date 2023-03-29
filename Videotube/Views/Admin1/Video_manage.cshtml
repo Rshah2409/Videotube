@@ -1,0 +1,159 @@
+﻿@model Videotube.Models.Videos
+@{
+    ViewBag.Title = "Video_manage";
+    Layout = "~/Views/Shared/Admin1.cshtml";
+}
+
+<div class="container-fluid">
+    <script type="text/javascript" src='https://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.3.min.js'></script>
+
+    <!-- Page Heading -->
+    <h1 class="h3 mb-2 text-gray-800" align="center"> Video  Manage</h1>
+
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary" ailng="center"> Database of Video </h6>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>S.N.</th>
+                            <th>Expert Name</th>
+                            <th>Expert Email</th>
+                            <th>Video_ID</th>
+                            <th>Video Category</th>
+                            <th>Video Title</th>
+                            <th>Video File</th>
+                            <th>Video Description</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>S.N.</th>
+                            <th>Expert Name</th>
+                            <th>Expert Email</th>
+                            <th>Video_ID</th>
+                            <th>Video Category</th>
+                            <th>Video Title</th>
+                            <th>Video File</th>
+                            <th>Video Description</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+
+                        @{ int count = 1;}
+                        @foreach (var item in Model.videos)
+                        {
+                            <tr>
+                                <td>@count</td>
+                                <td>@item.First_name @item.Last_name</td>
+                                <td>@item.Email_ID</td>
+                                <td>@item.Video_ID</td>
+                                <td>@item.V_category</td>
+                                <td>@item.V_title</td>
+                                <td>
+                                    <video width="250" height="150" controls controllist="nodownload" @*poster="~Content/Expert/hh.jfif"*@>
+
+                                        <source src="@Url.Content(item.V_file)" type="video/mp4">
+
+                                    </video>
+                                </td>
+                                <td>@item.V_description</td>
+                                <td>
+                                    @if (item.Status == "0")
+                                    {
+
+                                        <h6 style="color:red">Block</h6>
+                                    }
+                                    else
+                                    {
+                                        <h6 style="color:green">Unblock</h6>
+                                    }
+                                </td>
+                                <td>
+                                    <input type="button" id="btnShowLogin_@item.Video_ID" class="btn btn-primary" value="Update" />
+
+
+                                    <script type="text/javascript">
+                                    $(function () {
+                                        $("#btnShowLogin_@item.Video_ID").click(function () {
+                                            $('#LoginModal_@item.Video_ID').modal('show');
+                                        });
+                                    });
+                                    </script>
+                                    <div class="modal fade" id="LoginModal_@item.Video_ID" tabindex="-1" role="dialog" aria-labelledby="ModalTitle"
+                                         aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h4 class="modal-title" id="ModalTitle">
+                                                        Update
+                                                    </h4><button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                                        &times;
+                                                    </button>
+                                                </div>
+
+                                                <form action="/Admin1/Video_manage" method="post">
+                                                    <div class="modal-body">
+                                                        <input type="text" value="@item.Video_ID" name="vid" hidden />
+                                                        <label for="txtUsername">
+                                                           Video Category
+                                                        </label>
+                                                        <input type="text" name="fname" value="@item.V_category" class="form-control" readonly />
+                                                        <label for="txtUsername">
+                                                            Video Title
+                                                        </label>
+                                                        <input type="text" name="lname" class="form-control" required value="@item.V_title" readonly />
+                                                        @*<label for="txtUsername">
+                                                            Status
+                                                        </label><br />
+                                                        <input type="email" name="email" class="form-control" required value="@item.Email_ID" readonly />*@
+                                                        @*<label for="txtUsername">
+                                                                ID Proof
+                                                            </label><br />
+                                                            <input type="image" name="id" class="form-control" required*@ @*value="@item.ID_Proof" readonly />*@
+                                                            <label for="txtUsername">
+                                                                Status
+                                                            </label><br />
+                                                            <input type="text" name="status" class="form-control" required value="@item.Status" />
+                                                            @*<select id="status"  class="form-control" required>
+                                                                <option style="color:red">Block</option>
+                                                                <option style="color:green">Unblock</option>
+                                                                </select>*@
+                                                        </div>
+
+                                                        <div class="modal-footer">
+                                                            <input type="submit" value="Click to Save" class="btn-success" />
+                                                            <button type="button" class="btn btn-default" data-dismiss="modal">
+                                                                Close
+                                                            </button>
+                                                        </div>
+
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+
+
+                                    </td>
+
+                                </tr>
+                                count++;
+                            }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>
+

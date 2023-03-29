@@ -1,0 +1,81 @@
+﻿@model Videotube.Models.V_Feedback
+@{
+    ViewBag.Title = "Feedback_Ex";
+    Layout = "~/Views/Shared/Admin1.cshtml";
+}
+
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <h1 class="h3 mb-2 text-gray-800" align="center"> Feedback List</h1>
+
+
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary"> Feedback DataTables</h6>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>S.N.</th>
+                            <th hidden>Exp_ID</th>
+                            <th>Name</th>
+                            <th> Eamil_ID</th>
+                            <th>Subject</th>
+                            <th> Comment</th>
+
+
+
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>S.N.</th>
+                            <th hidden>Exp_ID</th>
+                            <th>Name</th>
+                            <th> Eamil_ID</th>
+                            <th>Subject</th>
+                            <th> Comment</th>
+                        </tr>
+
+                    </tfoot>
+                    <tbody>
+
+
+
+
+                        @{ int count = 1;}
+                        @foreach (var item in Model.VFeedback)
+                        {
+                            <tr>
+                                <td>@count</td>
+                                <td hidden>@item.Exp_ID</td>
+                                <td>@item.Name</td>
+                                <td>@item.Email_ID</td>
+                                <td>@item.Subject</td>
+                                <td>@item.Comment</td>
+
+
+                                <td>
+                                </td>
+
+                            </tr>
+                            count++;
+                        }
+
+
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
+

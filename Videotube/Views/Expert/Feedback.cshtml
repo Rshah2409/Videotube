@@ -1,0 +1,97 @@
+﻿
+@{
+    ViewBag.Title = "Feedback";
+    Layout = "~/Views/Shared/Expertlayout.cshtml";
+}
+
+<html lang="en">
+
+<div class="row">
+
+    <div class="col-lg-7">
+
+        <div class="p-5">
+            <div>
+                <h1 align="center"> Feedback Form</h1>
+            </div>
+            <form class="user" action="/Expert/Feedback" method="post">
+
+
+                <div class="form-group">
+                    <input type="text" class="form-control " id=""
+                           placeholder="Name" name="Name" required="" pattern="[a-zA-Z]{1,20}+">
+                </div>
+
+                <br />
+
+
+
+
+                <div class="form-group">
+                    <input type="email" class="form-control " id="exampleInputEmail"
+                           placeholder="Email Address" name="Email_ID" required="" title="Please Enter Valid Email Id"">
+                </div>
+                <br />
+
+
+
+                <div class="form-group">
+                    <input type="text" class="form-control " id=""
+                           placeholder="Subject" name="Subject" required="" pattern="[a-zA-Z'-'\s]*">
+                </div>
+                <br />
+
+
+
+
+                <div class="form-group">
+                    <input type="text" class="form-control " id=""
+                           placeholder="Comment" name="Comment" required="" pattern="[a-zA-Z'-'\s]*">
+                </div>
+                <br />
+
+
+
+                <center>
+
+                    <button type="submit" class="btn btn-primary btn-user"> Submit</button>
+                    <button type="reset" class="btn btn-primary btn-user"> Reset</button>
+                </center>
+
+                @if (ViewData["msgfeed"]!=null)
+                {
+                    <script language="javascript">
+
+                                    alert('@ViewData["msgfeed"]');
+                                        window.location.href = "@Url.Action("Feedback", "Expert")";
+
+                    </script>
+                }
+
+
+
+
+
+            </form>
+            
+
+
+        </div>
+    </div>
+</div>
+              
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="~/Content/Expert/vendor/jquery/jquery.min.js"></script>
+    <script src="~/Content/Expert/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="~/Content/Expert/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="~/Content/Expert/js/sb-admin-2.min.js"></script>
+
+</body>
+
+</html>
+

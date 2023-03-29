@@ -1,0 +1,81 @@
+﻿@model Videotube.Models.Videos
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/Expertlayout.cshtml";
+}
+
+<div class="container-fluid">
+    <script type="text/javascript" src='https://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.3.min.js'></script>
+
+    <!-- Page Heading -->
+    <h1 class="h3 mb-2 text-gray-800" align="center"> Subscription Planlist</h1>
+
+
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary" ailng="center"> Plan DataTables </h6>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+
+                    
+                        <tr>
+                            <th>S.N.</th>
+                            <th>Subscriber ID</th>
+                            <th>Video ID</th>
+                            <th>Plan Name</th>
+                            <th>Date</th>
+                            <th>Expiry Date</th>
+                            <th>Payment Status</th>
+                            @*<th>Action</th>*@
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>S.N.</th>
+                            <th>Subscriber ID</th>
+                            <th>Video ID</th>
+                            <th>Plan Name</th>
+                            <th>Date</th>
+                            <th>Expiry Date</th>
+                            <th>Payment Status</th>
+                            @*<th>Action</th>*@
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        @{ int count = 1; }
+                        @foreach (var item in Model.videos)
+                        {
+
+
+                            <tr>
+                                <td>@count</td>
+                                <td>@item.Sub_ID</td>
+                                <td>@item.Video_ID</td>
+                                <td>@item.Plan_name</td>
+                                <td>@DateTime.Now.ToString("dd/MM/yyyy")</td>
+                                <td>@item.Exp_Date</td>
+                                <td>
+                                    @if (item.Payment_amt != null)
+                {
+                    <h6 style="color:green">Paid</h6>
+                }
+                else
+                {
+                    <h6 style="color:red">Unpaid</h6>
+                }
+                                </td>
+
+                                @*<td>1</td>*@
+                            </tr>
+                            count++;
+                            @*<input type="text" hidden  name="Sub_ID" value="@item.Sub_ID" />*@
+                        }
+                    </tbody>
+
+                </table>
+            </div>
+        </div>

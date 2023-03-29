@@ -1,0 +1,104 @@
+﻿
+@{
+    ViewBag.Title = "Feedback";
+    Layout = "~/Views/Shared/_LayoutPage1.cshtml";
+}
+
+<html lang="en">
+<style>
+    *{
+        align-content:center;
+    }
+</style>
+<body>
+    <center>
+        <div class="row">
+
+            <div class="col-lg-7">
+
+                <div class="p-5">
+                    <div>
+                        <h1 align="center"> Feedback Form</h1>
+                    </div>
+                    <form class="user" action="/Viewer/Feedback" method="post" align="center">
+
+
+                        <div class="form-group">
+                            <input type="text" class="form-control " id=""
+                                   placeholder="Name" name="Name" required="" pattern="[a-zA-Z]{1,20}+">
+                        </div>
+
+                        <br />
+
+
+
+
+                        <div class="form-group">
+                            <input type="email" class="form-control " id="exampleInputEmail"
+                                   placeholder="Email Address" name="Email_ID" required="">
+                        </div>
+                        <br />
+
+
+
+                        <div class="form-group">
+                            <input type="text" class="form-control " id=""
+                                   placeholder="Subject" name="Subject" required="">
+                        </div>
+                        <br />
+
+
+
+
+                        <div class="form-group">
+                            <input type="text" class="form-control " id=""
+                                   placeholder="Comment" name="Comment" required="">
+                        </div>
+                        <br />
+
+
+
+
+
+                        <button type="submit" class="btn btn-primary btn-user btn-block"> Submit</button>
+                        <button type="reset" class="btn btn-primary btn-user btn-block"> Reset</button>
+
+                        @if (ViewData["msgfeed"] != null)
+                        {
+                            <script language="javascript">
+
+                                    alert('@ViewData["msgfeed"]');
+                                        window.location.href = "@Url.Action("Feedback", "Viewer")";
+
+                            </script>
+                        }
+
+
+
+
+
+                    </form>
+
+
+
+                </div>
+            </div>
+        </div>
+
+
+        @*Bootstrap core JavaScript*@
+        <script src="~/Content/Expert/vendor/jquery/jquery.min.js"></script>
+        <script src="~/Content/Expert/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+        @*Core plugin JavaScript*@
+        <script src="~/Content/Expert/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+        @*Custom scripts for all pages*@
+        <script src="~/Content/Expert/js/sb-admin-2.min.js"></script>
+    </center>
+</body>
+
+</html>
+
+
+

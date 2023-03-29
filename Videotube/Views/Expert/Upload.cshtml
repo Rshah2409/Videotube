@@ -1,0 +1,127 @@
+﻿
+
+@model Videotube.Models.Plan_list
+
+@{
+    ViewBag.Title = "Upload";
+    Layout = "~/Views/Shared/Expertlayout.cshtml";
+}
+
+
+<!-- Nested Row within Card Body -->
+<div class="row">
+
+    <div class="col-lg-7">
+
+        <div class="p-5">
+
+            <form class="user" action="/Expert/Upload1" method="post" enctype="multipart/form-data">
+
+
+
+                <div class="form-group">
+
+
+                    Select Subscription plan <select class="form-control" name="ss_plan" required>
+
+
+    @foreach (var str in ViewBag.Plan_name)
+    {
+        <option value="@str.Sub_ID">@str.Plan_name1</option>
+       
+    }
+
+</select>
+                </div>
+
+                
+
+                <div class="form-group">
+
+
+
+                    Select Category <select class="form-control" name="V_category" required>
+                        <option>Art</option>
+                        <option>Pshycology</option>
+                        <option>Business</option>
+                        <option>Engineering </option>
+                        <option>Computer</option>
+                        <option>Philosophy </option>
+                        <option>Managment</option>
+                        <option>General Knowledge </option>
+                        <option>Regular Affairs</option>
+
+
+                    </select>
+                </div>
+
+                <br />
+                <div class="form-group">
+                    <input type="text" class="form-control "
+                           placeholder=" Video Title  " name="V_title" required>
+                </div>
+
+                <br />
+
+                <div class="form-group">
+                    <input type="file" class="form-control "
+                           placeholder="Upload video" name="V_file" onchange="validateFileSize();" id="f" required>
+                    <div id="dvMsg" style="background-color:Red; color:White; width:290px; padding:3px; display:none;">
+                        Maximum size allowed is 1 MB
+                    </div>
+                </div>
+
+
+                <br />
+
+
+                <div class="form-group">
+                    <input type="text" class="form-control "
+                           placeholder="Video description " name="V_description" required>
+                </div>
+                <br />
+
+
+
+
+
+                <center>
+                    <button type="submit" class="btn btn-primary btn-user" disabled  id="btn1"> Submit</button>
+                    <button type="reset" class="btn btn-primary btn-user "> Reset</button>
+                </center>
+
+                @if (TempData["msg12"] != null)
+                {
+                    <script language="javascript">
+
+                                    alert('@TempData["msg12"]');
+                                        window.location.href = "@Url.Action("Upload", "Expert")";
+
+                    </script>
+                }
+
+
+            </form>
+
+
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    function validateFileSize() {
+        var uploadControl = document.getElementById('f');
+        const button = document.getElementById('btn1');
+        if (uploadControl.files[0].size > 1048576) {
+            button.disabled = true;
+            document.getElementById('dvMsg').style.display = "block";
+            return false;
+        }
+        else {
+            button.disabled = false;
+            document.getElementById('dvMsg').style.display = "none";
+            return true;
+        }
+    }
+</script>

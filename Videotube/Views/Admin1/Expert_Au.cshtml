@@ -1,0 +1,154 @@
+﻿@model Videotube.Models.Videos
+@{
+    ViewBag.Title = "Expert_Au";
+    Layout = "~/Views/Shared/Admin1.cshtml";
+}
+
+
+<div class="container-fluid">
+    <script type="text/javascript" src='https://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.3.min.js'></script>
+
+    <!-- Page Heading -->
+    <h1 class="h3 mb-2 text-gray-800" align="center"> Expert List</h1>
+
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary" ailng="center"> Expert DataTable </h6>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>S.N.</th>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Email ID</th>
+                            <th>ID Proof</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>S.N.</th>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Email ID</th>
+                            <th>ID Proof</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+
+                        @{ int count = 1;}
+                        @foreach (var item in Model.videos)
+                        {
+                            <tr>
+                                <td>@count</td>
+                                <td>@item.First_name</td>
+                                <td>@item.Last_name</td>
+                                <td>@item.Email_ID</td>
+
+                                <td>
+                                    <img width="100" height="100" source src="@Url.Content(item.ID_Proof)" type="image/jpeg"/>
+                              
+                                <a href="#">Download</a>
+                                </td>
+             
+                                <td>
+                                    @if (item.Status == "0")
+                                    {
+
+                                        <h6 style="color:red">Block</h6>
+                                    }
+                                    else
+                                    {
+                                        <h6 style="color:green">Unblock</h6>
+                                    }
+                                </td>
+                                <td>
+                                    <input type="button" id="btnShowLogin_@item.User_ID" class="btn btn-primary" value="Update" />
+
+
+                                    <script type="text/javascript">
+                                    $(function () {
+                                        $("#btnShowLogin_@item.User_ID").click(function () {
+                                            $('#LoginModal_@item.User_ID').modal('show');
+                                        });
+                                    });
+                                    </script>
+                                    <div class="modal fade" id="LoginModal_@item.User_ID" tabindex="-1" role="dialog" aria-labelledby="ModalTitle"
+                                         aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h4 class="modal-title" id="ModalTitle">
+                                                        Edit Expert List
+                                                    </h4><button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                                        &times;
+                                                    </button>
+                                                </div>
+
+                                                <form action="/Admin1/Expert_Update" method="post">
+                                                    <div class="modal-body">
+                                                        <input type="text"  value="@item.User_ID" name="uid" hidden />
+                                                        <label for="txtUsername">
+                                                            First Name
+                                                        </label>
+                                                        <input type="text" name="fname" value="@item.First_name" class="form-control" readonly />
+                                                        <label for="txtUsername">
+                                                            Last Name
+                                                        </label>
+                                                        <input type="text" name="lname" class="form-control" required value="@item.Last_name" readonly />
+                                                        <label for="txtUsername">
+                                                            Email ID
+                                                        </label><br />
+                                                        <input type="email" name="email" class="form-control" required value="@item.Email_ID" readonly />
+                                                        @*<label for="txtUsername">
+                                                            ID Proof
+                                                        </label><br />
+                                                        <input type="image" name="id" class="form-control" required*@ @*value="@item.ID_Proof" readonly />*@
+                                                        <label for="txtUsername">
+                                                            Status
+                                                        </label><br />
+                                                        <input type="text" name="status" class="form-control" required value="@item.Status"/>
+                                                        @*<select id="status"  class="form-control" required>
+                                                        <option style="color:red">Block</option>
+                                                        <option style="color:green">Unblock</option>
+                                                        </select>*@                                     
+                                                    </div>
+                                            
+                                                    <div class="modal-footer">
+                                                        <input type="submit" value="Click to Save" class="btn-success" />
+                                                        <button type="button" class="btn btn-default" data-dismiss="modal">
+                                                            Close
+                                                        </button>
+                                                    </div>
+
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+
+
+                                </td>
+
+                            </tr>
+                            count++;
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
+

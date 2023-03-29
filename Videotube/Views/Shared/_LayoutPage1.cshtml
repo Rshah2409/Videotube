@@ -1,0 +1,127 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title></title>
+    <link rel="shortcut icon" type="image/x-icon" href="~/Content/Lassests/images/pageicon.png" />
+    <link href="~/Content/Lassests/css/style.css" rel="stylesheet" type="text/css" media="all" />
+    <meta name="keywords" content="Videostube iphone web template, Android web template, Smartphone web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
+    <link href='//fonts.googleapis.com/css?family=Ropa+Sans' rel='stylesheet' type='text/css'>
+    <!-- Custom fonts for this template-->
+    <link href="~/Content/Expert/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+          rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <link href="~/Content/Expert/css/sb-admin-2.min.css" rel="stylesheet">
+
+    <link href="~/Content/Expert/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="header">
+        <!----start-Logo---->
+        <div class="logo">
+            <a href="index.html"><img src="~/Content/Lassests/images/logo.png" title="logo" /></a>
+        </div>
+        <!----End-Logo---->
+        <!----start-top-nav---->
+        <div class="top-nav">
+
+
+            <ul>
+                @if (Session["Viwere_ID"] == null)
+                {
+
+
+                    <li><a href="/Viewer/Home">Home</a> </li>
+
+                    @*<li><a href="/Expert/Login">Admin</a> </li>*@
+                    <li><a href="/Viewer/Login">Learner</a></li>
+                    @*<li><a href="/Viewer/Registration">Registration</a> </li>*@
+                    <li><a href="/Expert/Login">Expert</a> </li>
+                    <li><a href="/Admin1/Login">Admin</a> </li>
+
+                    @*<li><a href="#">Subscribe</a></li>
+            <li><a href="#">Library</a> </li>*@
+                }
+                else
+                {
+                    <li><a href="/Viewer/Home">Home</a> </li>
+                    @*<li><a href="#">Subscribe</a></li>*@
+                    <li><a href="/Viewer/Library">Library</a> </li>
+                    <li><a href="/Viewer/Feedback">Feedback</a></li>
+                    <li><a href="#">@Session["fname"].ToString()<br /> @*@DateTime.Now.ToString("dd/MM/yyyy")*@</a></li>
+                    <li><a href="/Viewer/Logout">Logout</a></li>
+
+
+
+
+
+                    @*</li>*@
+
+                    @*<li><a href="/Viewer/Logout">Logout</a></li>*@
+                    @*<li><a href="/Viewer/Login">Login</a></li>
+            <li><a href="/Viewer/Registration">Registration</a> </li>*@
+                    @*<li><a href="/Expert/Login">Expert</a> </li>*@
+
+                }
+
+
+            </ul>
+
+
+
+        </div>
+        <div class="clear"> </div>
+        <!----End-top-nav---->
+    </div>
+    <!----End-Header---->
+    <div>
+        @RenderBody()
+    </div>
+
+
+    <div class="footer">
+        <div class="clear"> </div>
+        <div class="copy-right">
+            <p>
+                © 2022 Videostube. All Rights Reserved | Design by  HR
+
+            </p>
+        </div>
+
+    </div>
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="~/Content/Expert/vendor/jquery/jquery.min.js"></script>
+    <script src="~/Content/Expert/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="~/Content/Expert/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="~/Content/Expert/js/sb-admin-2.min.js"></script>
+
+    <!-- Page level plugins -->
+    <script src="~/Content/Expert/vendor/chart.js/Chart.min.js"></script>
+
+    <!-- Page level custom scripts -->
+    <script src="~/Content/Expert/js/demo/chart-area-demo.js"></script>
+    <script src="~/Content/Expert/js/demo/chart-pie-demo.js"></script>
+    <script src="~/Content/Expert/vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="~/Content/Expert/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+    <!-- Page level custom scripts -->
+    <script src="~/Content/Expert/js/demo/datatables-demo.js"></script>
+
+
+
+
+
+
+
+
+
+</body>
+</html>

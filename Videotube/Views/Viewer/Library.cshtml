@@ -1,0 +1,71 @@
+﻿@model Videotube.Models.Videos
+@{
+    ViewBag.Title = "Library";
+    Layout = "~/Views/Shared/_LayoutPage1.cshtml";
+}
+
+
+    <div class="container-fluid">
+        <script type="text/javascript" src='https://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.3.min.js'></script>
+
+        <!-- Page Heading -->
+        <h1 class="h3 mb-2 text-gray-800" align="center"> Your Subscribed Videos:</h1>
+
+
+        <!-- DataTales Example -->
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary" ailng="center">My Videos </h6>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>S.N.</th>
+                                <th>Plan Name</th>
+                                <th>Video Title</th>
+                                
+                                <th>Video File</th>
+                                <th>Video Description</th>
+                                <th>Expiry Date</th>
+                            </tr>
+                        </thead>
+                        <tfoot>
+                            <tr>
+                                <th>S.N.</th>
+                                <th>Plan Name</th>
+                                <th>Video Title</th>
+                                
+                                <th>Video File</th>
+                                <th>Video Description</th>
+                                <th>Expiry Date</th>
+                            </tr>
+                        </tfoot>
+                        <tbody>
+                            @{ int count = 1;}
+                            @foreach (var item in Model.videos)
+                            {
+                                <tr>
+                                    <td>@count</td>
+                                    <td>@item.Plan_name</td>
+                                    <td>@item.V_title</td>
+                                    
+                                    <td>
+                                        <video width="250" height="150" controls controllist="nodownload" @*poster="~Content/Expert/hh.jfif"*@>
+
+                                            <source src="@Url.Content(item.V_file)" type="video/mp4">
+
+                                        </video>
+                                    </td>
+                                    <td>@item.V_description</td>
+                                    <td>@item.Exp_Date</td>
+                                </tr>
+                                count++;
+                            }
+                            </tbody>
+                                   
+    </table>
+</div>
+</div>
+</div>
